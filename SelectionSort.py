@@ -16,7 +16,16 @@ def selection_sort(lst):
         i += 1
 
 
+def selectionSort(lst):
+    for i in range(len(lst)):
+        min_index = i
+        for j in range(i, len(lst)):
+            if lst[min_index] > lst[j]:
+                min_index = j
+        lst[i], lst[min_index] = lst[min_index], lst[i]
+
+
 if __name__ == '__main__':
     lst = [1, 3, 2, 5]
-    selection_sort(lst)
+    selectionSort(lst)
     print(lst)
