@@ -35,11 +35,37 @@ def __q_sort(lst, start, end):
     return lst
 
 
+def __q_3way(lst, start, end):
+    if start >= end:
+        return lst
+
+    base = lst[start]
+    lt, gt, i = start, end + 1, start + 1
+    while i < gt:
+        if lst[i] < base:
+            lst[lt + 1], lst[i] = lst[i], lst[lt + 1]
+            i += 1
+            lt += 1
+        elif lst[i] > base:
+            lst[gt - 1], lst[i] = lst[i], lst[gt - 1]
+            gt -= 1
+        else:
+            i += 1
+    lst[start], lst[lt] = lst[lt], lst[start]
+    __q_3way(lst, start, lt - 1)
+    __q_3way(lst, gt, end)
+    return lst
+
+
 def quickSort(lst):
     return __q_sort(lst, 0, len(lst) - 1)
 
 
+def qucikSort3way(lst):
+    return __q_3way(lst, 0, len(lst) - 1)
+
+
 if __name__ == '__main__':
     lst = generator()
-    result = quickSort(lst)
+    result = qucikSort3way(lst)
     print(result)
